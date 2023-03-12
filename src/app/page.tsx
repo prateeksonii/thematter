@@ -1,10 +1,16 @@
-"use client";
-
 import Link from "next/link";
 import Balancer from "react-wrap-balancer";
-import { signIn } from "next-auth/react";
+import { getSession } from "../server/session";
+import { redirect } from "next/navigation";
+import SignIn from "./components/SignIn";
 
-export default function Home() {
+export default async function Home() {
+  const session = await getSession();
+
+  if (session) {
+    redirect("/app");
+  }
+
   return (
     <main className="mx-auto container">
       <div className="min-h-screen grid grid-cols-2 place-items-center">
@@ -13,16 +19,7 @@ export default function Home() {
             <Balancer>The best way to track your projects</Balancer>
           </h1>
           <div className="py-12 flex items-center gap-x-4">
-            <button
-              onClick={() =>
-                signIn("github", {
-                  callbackUrl: "/app",
-                })
-              }
-              className="bg-neutral-100 text-neutral-900 py-4 px-8 text-lg font-bold rounded-full"
-            >
-              Sign in with Github
-            </button>
+            <SignIn />
             <Link
               href="/learn-more"
               className="border-2 border-neutral-100 text-neutral-100 py-4 px-8 text-lg font-bold rounded-full"

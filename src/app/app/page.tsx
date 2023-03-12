@@ -1,12 +1,11 @@
-import Image from "next/image";
 import Link from "next/link";
 import { redirect } from "next/navigation";
-import { getCurrentUser } from "~/src/server/session";
+import { getSession } from "~/src/server/session";
 
 export default async function AppPage(props: any) {
-  const user = await getCurrentUser();
+  const session = await getSession();
 
-  if (!user) {
+  if (!session) {
     redirect("/");
   }
 
