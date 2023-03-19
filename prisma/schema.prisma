@@ -47,6 +47,7 @@ model User {
   accounts      Account[]
   sessions      Session[]
   Projects      Project[]
+  Tasks         Task[]
 }
 
 model VerificationToken {
@@ -66,4 +67,36 @@ model Project {
 
   User   User   @relation(fields: [userId], references: [id])
   userId String
+  Tasks  Task[]
+}
+
+enum Priority {
+  LOW
+  NORMAL
+  HIGH
+  URGENT
+}
+
+enum Status {
+  TODO
+  IN_PROGRESS
+  WAITING
+  DONE
+}
+
+model Task {
+  id          String   @id @default(cuid())
+  title       String
+  description String?
+  priority    Priority @default(NORMAL)
+  status      Status   @default(TODO)
+
+  createdAt     DateTime @default(now())
+  lastUpdatedAt DateTime @updatedAt
+
+  User   User   @relation(fields: [userId], references: [id])
+  userId String
+
+  Project   Project @relation(fields: [projectId], references: [id])
+  projectId String
 }

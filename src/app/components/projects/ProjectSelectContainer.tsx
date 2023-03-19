@@ -1,19 +1,8 @@
 import Link from "next/link";
 import { prisma } from "~/src/server/db";
+import { fetchProjects } from "~/src/server/projects";
 import { getCurrentUser } from "~/src/server/session";
 import ProjectSelect from "./ProjectSelect";
-
-const fetchProjects = async () => {
-  const user = await getCurrentUser();
-  return prisma.project.findMany({
-    where: {
-      userId: user?.id,
-    },
-    orderBy: {
-      lastUpdatedAt: "desc",
-    },
-  });
-};
 
 export default async function ProjectSelectContainer({
   currentId,

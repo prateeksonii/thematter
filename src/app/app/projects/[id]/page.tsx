@@ -1,15 +1,5 @@
 import ProjectSelectContainer from "~/src/app/components/projects/ProjectSelectContainer";
-import { prisma } from "~/src/server/db";
-
-const fetchProject = async (projectId: string) => {
-  const project = await prisma.project.findFirst({
-    where: {
-      id: projectId,
-    },
-  });
-
-  return project;
-};
+import { fetchProject } from "~/src/server/projects";
 
 export default async function ProjectPage({
   params,

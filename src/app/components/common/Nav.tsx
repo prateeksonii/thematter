@@ -7,7 +7,6 @@ import { HiFolder, HiPuzzlePiece } from "react-icons/hi2";
 
 export default function Nav() {
   const pathname = usePathname();
-  console.log(pathname?.startsWith("/app/projects"));
 
   return (
     <nav className="h-full bg-neutral-800 rounded-xl flex flex-col items-center shadow">

@@ -1,19 +1,7 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
-import { prisma } from "~/src/server/db";
-import { getCurrentUser, getSession } from "~/src/server/session";
-
-const fetchLastProject = async () => {
-  const user = await getCurrentUser();
-  return prisma.project.findFirst({
-    where: {
-      userId: user?.id,
-    },
-    orderBy: {
-      lastUpdatedAt: "desc",
-    },
-  });
-};
+import { fetchLastProject } from "~/src/server/projects";
+import { getSession } from "~/src/server/session";
 
 export default async function AppPage(props: any) {
   const session = await getSession();
