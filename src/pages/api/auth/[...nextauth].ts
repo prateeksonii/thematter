@@ -17,6 +17,7 @@ export const authOptions: NextAuthOptions = {
       return session;
     },
   },
+  debug: process.env.DEBUG ? process.env.DEBUG === "true" : false,
 };
 
 export default NextAuth(authOptions);
