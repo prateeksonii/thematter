@@ -24,6 +24,7 @@ export default async function ProjectPage({
 
   return (
     <div>
+      {/* @ts-expect-error Server Component */}
       <ProjectSelectContainer currentId={project.id} />
       <div className="p-2"></div>
       <small>Project</small>
