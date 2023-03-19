@@ -1,3 +1,4 @@
+import ProjectSelectContainer from "~/src/app/components/projects/ProjectSelectContainer";
 import { prisma } from "~/src/server/db";
 
 const fetchProject = async (projectId: string) => {
@@ -23,7 +24,17 @@ export default async function ProjectPage({
 
   return (
     <div>
+      <ProjectSelectContainer currentId={project.id} />
+      <div className="p-2"></div>
+      <small>Project</small>
       <h1 className="text-4xl">{project.title}</h1>
+      {project.description ? (
+        <p className="bg-neutral-800 p-4 mt-2 rounded-md">
+          {project.description}
+        </p>
+      ) : (
+        <p className="text-neutral-300">No description present</p>
+      )}
     </div>
   );
 }
