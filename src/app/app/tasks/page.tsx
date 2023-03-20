@@ -1,15 +1,7 @@
-import { prisma } from "~/src/server/db";
 import { Status } from "@prisma/client";
 import Link from "next/link";
 import { HiPlus } from "react-icons/hi2";
-
-const fetchTasks = async (status: Status) => {
-  return prisma.task.findMany({
-    where: {
-      status,
-    },
-  });
-};
+import { fetchTasks } from "~/src/server/tasks";
 
 export default async function TasksPage() {
   const tasks = await fetchTasks(Status.TODO);
