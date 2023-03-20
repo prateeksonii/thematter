@@ -26,7 +26,17 @@ export default async function TasksPage() {
         </Link>
       </div>
       {tasks.length > 0 ? (
-        <div>tasks</div>
+        <ul className="grid grid-cols-4 gap-8">
+          {tasks.map((task) => (
+            <li key={task.id} className="p-4 bg-neutral-800 rounded-md">
+              <h2 className="font-bold text-2xl">{task.title}</h2>
+              <div className="text-sm flex items-center justify-between">
+                <span>{task.status}</span>
+                <span>{task.priority}</span>
+              </div>
+            </li>
+          ))}
+        </ul>
       ) : (
         <p className="flex-1 grid place-items-center h-full text-lg">
           No tasks at the moment
